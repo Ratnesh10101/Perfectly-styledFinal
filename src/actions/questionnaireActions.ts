@@ -6,7 +6,6 @@
  */
 
 import type { QuestionnaireData, UserReportData } from "@/types";
-import { firebaseInitialized, firebaseInitError } from "@/config/firebase"; 
 import { bodyShapeAdvice, dominantLineAdvice, dominantScaleAdvice } from '@/data/styleReports';
 
 // Log when the module is loaded on the server
@@ -222,8 +221,6 @@ export async function processPaymentAndGenerateReport(
   questionnaireData: QuestionnaireData | null,
   email: string | null
 ): Promise<{ success: boolean; message: string; reportData?: UserReportData }> {
-  console.log("--- processPaymentAndGenerateReport action entered on server (logic-based report) ---");
-  console.log(`Initial Firebase Initialized: ${firebaseInitialized}, Firebase Init Error: ${firebaseInitError || 'None'}`);
   // NOTE: AI/Genkit specific logs removed as AI flow is no longer used.
 
   if (!questionnaireData) {
@@ -239,15 +236,6 @@ export async function processPaymentAndGenerateReport(
   
   console.log("Received Questionnaire Data for logic-based report:", JSON.stringify(questionnaireData, null, 2));
   console.log("Received Email for logic-based report:", email);
-
-  // Check if Firebase services needed for other parts (if any) are initialized
-  // This check is more for general Firebase SDK health if it were still used for DB/Auth.
-  // For a logic-only report, this might be less critical, but good for diagnostics.
-  if (!firebaseInitialized) {
-    const errMsg = "processPaymentAndGenerateReport Warning: Firebase is not initialized. This might indicate missing NEXT_PUBLIC_FIREBASE_... environment variables. Report generation will proceed with logic-based method, but other Firebase features (if any) would fail.";
-    console.warn(errMsg);
-    if (firebaseInitError) {
-      console.warn("Firebase Initialization Error details:", firebaseInitError);
     }
     // We can proceed with logic-based report even if Firebase client SDK isn't fully up.
   }
