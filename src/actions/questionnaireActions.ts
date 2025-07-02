@@ -225,7 +225,6 @@ export async function processPaymentAndGenerateReport(
 
   if (!questionnaireData) {
     const errorMsg = "processPaymentAndGenerateReport ERRORED: No questionnaire data provided. This should have been caught client-side.";
-    console.error(errorMsg);
     return { success: false, message: "Questionnaire data is missing. Cannot generate report." };
   }
   if (!email || !email.includes('@') || typeof email !== 'string') {
@@ -236,10 +235,8 @@ export async function processPaymentAndGenerateReport(
   
   console.log("Received Questionnaire Data for logic-based report:", JSON.stringify(questionnaireData, null, 2));
   console.log("Received Email for logic-based report:", email);
-    }
-    // We can proceed with logic-based report even if Firebase client SDK isn't fully up.
-  }
   
+  // We can proceed with logic-based report even if Firebase client SDK isn't fully up.
   try {
     console.log(`Proceeding to generate logic-based report for email: ${email}`);
     
@@ -281,5 +278,6 @@ export async function processPaymentAndGenerateReport(
       message: "An unexpected server error occurred while generating your report. Please check server logs for details or try again later."
     };
   }
+ return { success: false, message: "An unexpected error occurred." };
 }
     

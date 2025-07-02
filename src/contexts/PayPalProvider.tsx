@@ -11,7 +11,7 @@ export const PayPalProvider = ({ children }: PayPalProviderProps) => {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_SANDBOX_CLIENT_ID;
 
   const options = {
-    'client-id': clientId || '',
+    clientId: clientId || '',
     currency: 'GBP',
     intent: 'capture' as const,
   };

@@ -14,9 +14,6 @@ export default function HomePage() {
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] text-center">
       <Card className="w-full max-w-2xl shadow-xl">
         <CardHeader className="pb-4">
-          <div className="flex justify-center mb-6">
-             <Image src="https://placehold.co/120x120.png" alt="Perfectly Styled Logo" data-ai-hint="logo fashion" width={120} height={120} className="rounded-full" />
-          </div>
           <CardTitle className="text-4xl font-bold tracking-tight text-primary">Welcome to Perfectly Styled!</CardTitle>
           <CardDescription className="text-lg text-muted-foreground pt-2">
             Discover your unique style identity. Our AI-powered analysis helps you understand your body shape, and scale to curate a wardrobe that truly represents you.

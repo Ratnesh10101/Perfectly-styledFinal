@@ -66,15 +66,15 @@ export default function PayPalCheckout({
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                orderId: details.id,
-                payerId: details.payer.payer_id,
+                orderId: details.id!,
+                payerId: details.payer?.payer_id,
                 finalAmount: final,
                 discountCode,
               }),
             });
             onSuccess({
-              orderId: details.id,
-              payerId: details.payer.payer_id,
+              orderId: details.id!,
+              payerId: details.payer?.payer_id || '',
               finalAmount: final,
               discountCode: discountCode ?? undefined,
             });
