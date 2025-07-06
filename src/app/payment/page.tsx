@@ -295,10 +295,6 @@ export default function PaymentPage() {
               baseAmount={BASE_PRICE}
               discountCode={code}
               discountPercent={percent}
-<<<<<<< HEAD
-              onSuccess={setDone}
-              onError={e => alert('Payment error: ' + (e as Error).message)}
-=======
               onSuccess={handlePaymentSuccess}
               onError={e => {
                 console.error("PayPal Checkout Error:", e);
@@ -308,7 +304,6 @@ export default function PaymentPage() {
                   variant: "destructive",
                 });
               }}
->>>>>>> ff75e1b (Payment page final)
             />
           </div>
 
