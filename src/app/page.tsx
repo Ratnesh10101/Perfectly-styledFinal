@@ -16,7 +16,7 @@ export default function HomePage() {
         <CardHeader className="pb-4">
           <CardTitle className="text-4xl font-bold tracking-tight text-primary">Welcome to Perfectly Styled!</CardTitle>
           <CardDescription className="text-lg text-muted-foreground pt-2">
-            Discover your unique style identity. Our AI-powered analysis helps you understand your body shape, and scale to curate a wardrobe that truly represents you.
+            Discover your unique style identity. Our analysis helps you understand your body shape, scale and line to curate a wardrobe that truly represents you.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -26,8 +26,8 @@ export default function HomePage() {
               <p className="text-sm text-muted-foreground">Unlock recommendations tailored to your specific features.</p>
             </div>
              <div className="p-4 border rounded-lg bg-white">
-              <h3 className="font-semibold text-lg mb-1">AI-Powered Precision</h3>
-              <p className="text-sm text-muted-foreground">Leverage cutting-edge AI to analyse your style inputs effectively.</p>
+              <h3 className="font-semibold text-lg mb-1">Exhautsive and Detailed</h3>
+              <p className="text-sm text-muted-foreground">The questionnaire is thorough and the report is full of detail and covers all aspects of clothes and accessories.</p>
             </div>
              <div className="p-4 border rounded-lg bg-white">
               <h3 className="font-semibold text-lg mb-1">Boost Confidence</h3>
