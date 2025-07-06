@@ -147,9 +147,33 @@ export default function PaymentPage() {
           <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
             <span className="text-white text-3xl">✓</span>
           </div>
+<<<<<<< HEAD
           <h1 className="text-3xl font-bold mb-4">Payment Successful!</h1>
           <p className="text-lg text-purple-100 mb-6">Enter your email to receive your style report.</p>
 
+=======
+          <h1 className="text-3xl font-bold text-white mb-4">Payment Successful!</h1>
+          <p className="text-lg text-purple-100 mb-6">
+            Thank you for your purchase. Please enter your email to receive your personalized style report.
+          </p>
+          <div className="space-y-3 text-purple-100 mb-6">
+            <div className="bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
+              <p className="text-sm text-purple-200">Order ID</p>
+              <p className="font-mono text-white">{paymentDone.orderId}</p>
+            </div>
+            <div className="bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
+              <p className="text-sm text-purple-200">Amount Paid</p>
+              <p className="text-2xl font-bold text-yellow-300">£{paymentDone.finalAmount.toFixed(2)}</p>
+            </div>
+            {paymentDone.discountCode && (
+              <div className="bg-green-500/20 rounded-2xl p-4 backdrop-blur-sm border border-green-400/30">
+                <p className="text-sm text-green-200">Discount Applied</p>
+                <p className="font-semibold text-green-300">{paymentDone.discountCode}</p>
+              </div>
+            )}
+          </div>
+          
+>>>>>>> d67afaa (Page)
           <Form {...emailForm}>
             <form onSubmit={emailForm.handleSubmit(handleEmailSubmit)} className="space-y-4">
               <FormField
