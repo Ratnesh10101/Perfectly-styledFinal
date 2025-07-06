@@ -153,17 +153,7 @@ export default function ReportDisplay({ report }: ReportDisplayProps) {
         <Button onClick={handleDownloadPdf} variant="outline" disabled={!html2pdf}>
           <Download className="mr-2 h-4 w-4" /> Download as PDF
         </Button>
-        {recipientEmail && (
-          <Button variant="outline" asChild>
-            <a
-              href={`mailto:${recipientEmail}?subject=Your%20Perfectly%20Styled%20Report&body=Here%20is%20your%20personalised%20style%20report!`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Mail className="mr-2 h-4 w-4" /> Email Again (Draft)
-            </a>
-          </Button>
-        )}
+
       </CardFooter>
     </Card>
   );
