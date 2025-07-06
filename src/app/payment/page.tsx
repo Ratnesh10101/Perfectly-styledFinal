@@ -179,38 +179,11 @@ export default function PaymentPage() {
   if (paymentDone && showEmailInput) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-800 py-8 px-4">
-<<<<<<< HEAD
-        <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/20 text-center">
-=======
         <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/20 text-center text-white">
->>>>>>> ff75e1b (Payment page final)
           <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
             <span className="text-white text-3xl">✓</span>
           </div>
           <h1 className="text-3xl font-bold text-white mb-4">Payment Successful!</h1>
-<<<<<<< HEAD
-          <div className="space-y-3 text-purple-100">
-            <div className="bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
-              <p className="text-sm text-purple-200">Order ID</p>
-              <p className="font-mono text-white">{done.orderId}</p>
-            </div>
-            <div className="bg-white/10 rounded-2xl p-4 backdrop-blur-sm">
-              <p className="text-sm text-purple-200">Amount Paid</p>
-              <p className="text-2xl font-bold text-yellow-300">£{done.finalAmount.toFixed(2)}</p>
-            </div>
-            {done.discountCode && (
-              <div className="bg-green-500/20 rounded-2xl p-4 backdrop-blur-sm border border-green-400/30">
-                <p className="text-sm text-green-200">Discount Applied</p>
-                <p className="font-semibold text-green-300">{done.discountCode}</p>
-              </div>
-            )}
-          </div>
-          <div className="mt-8 p-4 bg-white/10 rounded-2xl backdrop-blur-sm">
-            <p className="text-purple-200 text-sm">
-              🎉 Your personalized style report will be delivered to your email shortly!
-            </p>
-          </div>
-=======
           <p className="text-lg text-purple-100 mb-6">
             Thank you for your purchase. Please enter your email to receive your personalized style report.
           </p>
