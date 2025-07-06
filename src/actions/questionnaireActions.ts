@@ -226,18 +226,10 @@ export async function processPaymentAndGenerateReport(
   paymentData: PaymentSuccessData | null, // Added paymentData parameter
   email: string | null
 ): Promise<{ success: boolean; message: string; reportData?: UserReportData }> {
-<<<<<<< HEAD
-  // NOTE: AI/Genkit specific logs removed as AI flow is no longer used.
-
-  if (!questionnaireData) {
-    const errorMsg = "processPaymentAndGenerateReport ERRORED: No questionnaire data provided. This should have been caught client-side.";
-=======
   console.log("Server Action: processPaymentAndGenerateReport initiated.");
 
   if (!questionnaireData) {
     const errorMsg = "Server Action: processPaymentAndGenerateReport ERRORED: No questionnaire data provided. This should have been caught client-side.";
-    console.error(errorMsg);
->>>>>>> ff75e1b (Payment page final)
     return { success: false, message: "Questionnaire data is missing. Cannot generate report." };
   }
   if (!email || typeof email !== 'string' || !email.includes('@')) { // Added more robust email validation
@@ -245,13 +237,6 @@ export async function processPaymentAndGenerateReport(
     console.error(errorMsg);
     return { success: false, message: "A valid email address is required to send the report." };
   }
-<<<<<<< HEAD
-  
-  console.log("Received Questionnaire Data for logic-based report:", JSON.stringify(questionnaireData, null, 2));
-  console.log("Received Email for logic-based report:", email);
-  
-  // We can proceed with logic-based report even if Firebase client SDK isn't fully up.
-=======
   // Validate paymentData
   if (!paymentData || !paymentData.orderId || !paymentData.payerId || paymentData.finalAmount === undefined || paymentData.finalAmount === null) { // Added paymentData.finalAmount === null check
     const errorMsg = `Server Action: processPaymentAndGenerateReport ERRORED: Missing or invalid payment data. Details: orderId=${paymentData?.orderId}, payerId=${paymentData?.payerId}, finalAmount=${paymentData?.finalAmount}.`;
@@ -262,8 +247,7 @@ export async function processPaymentAndGenerateReport(
   console.log("Server Action: Received Questionnaire Data for logic-based report:", JSON.stringify(questionnaireData, null, 2));
   console.log("Server Action: Received Payment Data:", JSON.stringify(paymentData, null, 2));
   console.log("Server Action: Received Email for logic-based report:", email);
-  
->>>>>>> ff75e1b (Payment page final)
+
   try {
     // --- Firestore: Save Payment Information ---
     console.log("Server Action: Attempting to save payment data to Firestore.");
@@ -349,5 +333,4 @@ export async function processPaymentAndGenerateReport(
       message: "An unexpected server error occurred while generating your report. Please check server logs for details or try again later."
     };
   }
- return { success: false, message: "An unexpected error occurred." };
 }
