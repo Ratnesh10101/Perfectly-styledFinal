@@ -41,7 +41,7 @@ export default function HomePage() {
         <CardFooter className="flex flex-col sm:flex-row justify-center gap-4 pt-6">
           <Button asChild size="lg">
             <Link href="/questionnaire">
-              Start Your Style Questionnaire <DraftingCompass className="ml-2 h-5 w-5" />
+              Start Your Style Questionnaire
             </Link>
           </Button>
         </CardFooter>
