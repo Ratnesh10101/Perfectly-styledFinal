@@ -174,7 +174,6 @@ export default function PaymentPage() {
     }
   };
 
-  const finalPrice = BASE_PRICE - (BASE_PRICE * percent) / 100;
 
   if (paymentDone && showEmailInput) {
     return (
