@@ -1,10 +1,8 @@
-
+// src/app/questionnaire/page.tsx
 "use client";
 
 import QuestionnaireForm from "@/components/QuestionnaireForm";
-// useAuth removed
 import { useToast } from "@/hooks/use-toast";
-// saveQuestionnaireData action removed, will be handled by payment action
 import { useRouter } from "next/navigation";
 import type { QuestionnaireData } from "@/types";
 
@@ -13,18 +11,17 @@ const PENDING_QUESTIONNAIRE_KEY = "pendingQuestionnaireData_v2";
 export default function QuestionnairePage() {
   const { toast } = useToast();
   const router = useRouter();
-  // Removed currentUser and userMeta from useAuth
 
   const handleSubmit = async (data: QuestionnaireData) => {
-    // Always save to localStorage and redirect to payment.
-    // No user-specific saving here anymore.
+    // Always save to sessionStorage and redirect to payment.
     try {
-      localStorage.setItem(PENDING_QUESTIONNAIRE_KEY, JSON.stringify(data));
+      // Changed from localStorage to sessionStorage
+      sessionStorage.setItem(PENDING_QUESTIONNAIRE_KEY, JSON.stringify(data));
       toast({ title: "Questionnaire Completed!", description: "Please proceed to payment to get your report." });
       router.push("/payment");
     } catch (error) {
       toast({ title: "Error Saving Answers", description: "Could not save your answers locally. Please try again.", variant: "destructive" });
-      console.error("Error saving questionnaire to localStorage:", error);
+      console.error("Error saving questionnaire to sessionStorage:", error);
     }
   };
 
@@ -46,7 +43,7 @@ export default function QuestionnairePage() {
                 Bear these words in mind when choosing outfits to buy.
             </p>
             <p>
-                Now, answer the questionnaire and recieve the results of your style
+                Now, answer the questionnaire and receive the results of your style
                 analysis along with recommended items of clothes and accessories
                 that will look best on each area of your body covered in the
                 questions!

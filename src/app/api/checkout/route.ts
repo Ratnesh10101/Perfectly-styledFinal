@@ -1,3 +1,4 @@
+// src/app/api/checkout/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
@@ -33,7 +34,7 @@ async function paypalOrder(amount: number, access: string) {
       intent: 'CAPTURE',
       purchase_units: [
         {
-          amount: { currency_code: 'GBP', value: amount.toFixed(2) },
+          amount: { currency_code: 'GBP', value: amount.toFixed(2) }, // Changed from 'EUR' to 'GBP'
           description: 'Perfectly Styled report',
         },
       ],

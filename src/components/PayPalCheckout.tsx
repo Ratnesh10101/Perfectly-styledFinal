@@ -1,3 +1,4 @@
+// components/PayPalCheckout.tsx
 "use client";
 
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
@@ -8,7 +9,7 @@ interface Props {
   baseAmount: number;
   discountCode: string | null;
   discountPercent: number;
-  onSuccess: (d: PaymentSuccessData) => void;
+  onSuccess: (d: PaymentSuccessData) => void; // Modified to pass PaymentSuccessData
   onError: (e: unknown) => void;
 }
 
@@ -28,13 +29,14 @@ export default function PayPalCheckout({
   return (
     <>
       <div className="mb-3">
-        <p>Subtotal: £{baseAmount.toFixed(2)}</p>
+        <p>Subtotal: £{baseAmount.toFixed(2)}</p> {/* Reverted currency symbol to £ */}
         {discountCode && (
           <p>
             Discount ({discountCode}): −£{savings.toFixed(2)}
           </p>
+        
         )}
-        <p className="font-semibold">Total: £{final.toFixed(2)}</p>
+        <p className="font-semibold">Total: £{final.toFixed(2)}</p> {/* Reverted currency symbol to £ */}
       </div>
 
       {isPending && <p>Loading PayPal…</p>}
@@ -60,21 +62,22 @@ export default function PayPalCheckout({
           }
         }}
         onApprove={async (data, actions) => {
+          setBusy(true); // Ensure busy state is true during approval process
           try {
             const details = await actions.order!.capture();
             await fetch('/api/payment-success', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                orderId: details.id!,
-                payerId: details.payer?.payer_id,
+                orderId: details.id,
+                payerId: details.payer.payer_id,
                 finalAmount: final,
                 discountCode,
               }),
             });
             onSuccess({
-              orderId: details.id!,
-              payerId: details.payer?.payer_id || '',
+              orderId: details.id,
+              payerId: details.payer.payer_id,
               finalAmount: final,
               discountCode: discountCode ?? undefined,
             });

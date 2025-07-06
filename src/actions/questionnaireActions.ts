@@ -1,4 +1,4 @@
-
+// src/actions/questionnaireActions.ts
 'use server';
 /**
  * @fileOverview Server actions for handling questionnaire data and report generation.
@@ -7,6 +7,10 @@
 
 import type { QuestionnaireData, UserReportData } from "@/types";
 import { bodyShapeAdvice, dominantLineAdvice, dominantScaleAdvice } from '@/data/styleReports';
+import { db } from '@/config/firebase'; // Import db for Firestore operations
+import { doc, increment, setDoc, updateDoc, getDoc } from 'firebase/firestore'; // Import Firestore functions
+import type { Order } from '@/types/discount'; // Import Order type
+import type { PaymentSuccessData } from '@/types/payment'; // Import PaymentSuccessData type
 
 // Log when the module is loaded on the server
 console.log("questionnaireActions.ts module loaded on server (logic-based report version).");
@@ -219,29 +223,93 @@ function generateLogicBasedReport(questionnaireData: QuestionnaireData): string 
 
 export async function processPaymentAndGenerateReport(
   questionnaireData: QuestionnaireData | null,
+  paymentData: PaymentSuccessData | null, // Added paymentData parameter
   email: string | null
 ): Promise<{ success: boolean; message: string; reportData?: UserReportData }> {
+<<<<<<< HEAD
   // NOTE: AI/Genkit specific logs removed as AI flow is no longer used.
 
   if (!questionnaireData) {
     const errorMsg = "processPaymentAndGenerateReport ERRORED: No questionnaire data provided. This should have been caught client-side.";
+=======
+  console.log("Server Action: processPaymentAndGenerateReport initiated.");
+
+  if (!questionnaireData) {
+    const errorMsg = "Server Action: processPaymentAndGenerateReport ERRORED: No questionnaire data provided. This should have been caught client-side.";
+    console.error(errorMsg);
+>>>>>>> ff75e1b (Payment page final)
     return { success: false, message: "Questionnaire data is missing. Cannot generate report." };
   }
-  if (!email || !email.includes('@') || typeof email !== 'string') {
-    const errorMsg = `processPaymentAndGenerateReport ERRORED: Invalid or missing email provided: ${String(email)}. This should have been caught client-side.`;
+  if (!email || typeof email !== 'string' || !email.includes('@')) { // Added more robust email validation
+    const errorMsg = `Server Action: processPaymentAndGenerateReport ERRORED: Invalid or missing email provided: ${String(email)}. This should have been caught client-side.`;
     console.error(errorMsg);
     return { success: false, message: "A valid email address is required to send the report." };
   }
+<<<<<<< HEAD
   
   console.log("Received Questionnaire Data for logic-based report:", JSON.stringify(questionnaireData, null, 2));
   console.log("Received Email for logic-based report:", email);
   
   // We can proceed with logic-based report even if Firebase client SDK isn't fully up.
+=======
+  // Validate paymentData
+  if (!paymentData || !paymentData.orderId || !paymentData.payerId || paymentData.finalAmount === undefined || paymentData.finalAmount === null) { // Added paymentData.finalAmount === null check
+    const errorMsg = `Server Action: processPaymentAndGenerateReport ERRORED: Missing or invalid payment data. Details: orderId=${paymentData?.orderId}, payerId=${paymentData?.payerId}, finalAmount=${paymentData?.finalAmount}.`;
+    console.error(errorMsg);
+    return { success: false, message: "Payment data is incomplete. Cannot finalize report." };
+  }
+  
+  console.log("Server Action: Received Questionnaire Data for logic-based report:", JSON.stringify(questionnaireData, null, 2));
+  console.log("Server Action: Received Payment Data:", JSON.stringify(paymentData, null, 2));
+  console.log("Server Action: Received Email for logic-based report:", email);
+  
+>>>>>>> ff75e1b (Payment page final)
   try {
-    console.log(`Proceeding to generate logic-based report for email: ${email}`);
+    // --- Firestore: Save Payment Information ---
+    console.log("Server Action: Attempting to save payment data to Firestore.");
+    const basePrice = 15.99; // Define base price for calculation consistent with frontend
     
+    // Construct orderData conditionally to avoid 'undefined' for discount fields
+    const orderData: Order = {
+      id: paymentData.orderId,
+      orderId: paymentData.orderId,
+      payerId: paymentData.payerId,
+      amount: paymentData.finalAmount,
+      baseAmount: basePrice,
+      status: 'completed',
+      createdAt: new Date().toISOString(),
+      capturedAt: new Date().toISOString(),
+      payerEmail: email, // Use the email collected from the form
+    };
+
+    if (paymentData.discountCode) {
+      orderData.discountCode = paymentData.discountCode;
+      orderData.discountAmount = basePrice - paymentData.finalAmount;
+
+      try {
+        console.log(`Server Action: Checking discount code ${paymentData.discountCode}.`);
+        const discountRef = doc(db, 'discountCodes', paymentData.discountCode);
+        const discountSnap = await getDoc(discountRef);
+        if (discountSnap.exists()) {
+          orderData.influencerId = discountSnap.data().owner;
+          await updateDoc(discountRef, { uses: increment(1) });
+          console.log(`Server Action: Discount code ${paymentData.discountCode} usage incremented.`);
+        } else {
+          console.warn(`Server Action: Discount code ${paymentData.discountCode} not found in Firestore. Skipping increment.`);
+        }
+      } catch (discountError: any) {
+        console.error("Server Action: Error processing discount code:", discountError);
+        // Do not rethrow, allow payment data to still be saved if possible
+      }
+    }
+
+    await setDoc(doc(db, 'orders', paymentData.orderId), orderData);
+    console.log(`Server Action: Payment order ${paymentData.orderId} saved to Firestore.`);
+
+    // --- Generate Report ---
+    console.log(`Server Action: Proceeding to generate logic-based report for email: ${email}`);
     const reportContent = generateLogicBasedReport(questionnaireData);
-    console.log(`Logic-based report generated successfully for email: ${email}. Report length: ${reportContent.length}`);
+    console.log(`Server Action: Logic-based report generated successfully for email: ${email}. Report length: ${reportContent.length}`);
     
     const reportData: UserReportData = {
       recommendations: reportContent,
@@ -250,28 +318,31 @@ export async function processPaymentAndGenerateReport(
       generatedAtClient: new Date().toISOString(), 
     };
 
-    console.log(`Report content generated for email: ${email}. Attempting to send (simulated) email.`);
+    console.log(`Server Action: Report content generated for email: ${email}. Attempting to send (simulated) email.`);
     const emailResult = await sendReportByEmail(email, reportData.recommendations, reportData.questionnaireData);
     if (!emailResult.success) {
-      console.warn(`Failed to send email (simulated) to ${email}: ${emailResult.message}`);
+      console.warn(`Server Action: Failed to send email (simulated) to ${email}: ${emailResult.message}`);
+    } else {
+      console.log(`Server Action: Simulated email sent successfully to ${email}.`);
     }
     
-    console.log(`Report generated and (simulated) email process completed for: ${email}. Returning success.`);
+    console.log(`Server Action: Report generated and (simulated) email process completed for: ${email}. Returning success.`);
     return { success: true, message: "Report generated successfully! It will also be (simulated) sent to your email.", reportData };
 
   } catch (error: any) {
-    console.error("--- processPaymentAndGenerateReport UNEXPECTED CRITICAL ERROR (logic-based report) ---");
+    console.error("--- Server Action: processPaymentAndGenerateReport UNEXPECTED CRITICAL ERROR (logic-based report) ---");
     let errorMessage = "An unknown server error occurred during report processing.";
     if (error instanceof Error) {
         errorMessage = error.message;
         console.error("Error message:", error.message);
+        console.error("Error name:", error.name);
         console.error("Error stack:", error.stack);
         if ((error as any).cause) console.error("Error cause:", (error as any).cause);
     } else {
         console.error("Critical Error (not an Error object):", error);
         try { errorMessage = JSON.stringify(error); } catch { errorMessage = "Could not stringify critical error object."; }
     }
-    console.error(`Returning critical failure for ${email}: ${errorMessage}`);
+    console.error(`Server Action: Returning critical failure for ${email}: ${errorMessage}`);
     // Return a simplified error message to the client
     return {
       success: false,
@@ -280,4 +351,3 @@ export async function processPaymentAndGenerateReport(
   }
  return { success: false, message: "An unexpected error occurred." };
 }
-    

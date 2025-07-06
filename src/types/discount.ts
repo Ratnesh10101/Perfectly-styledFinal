@@ -1,3 +1,4 @@
+// src/types/discount.ts
 export interface DiscountCode {
   id: string;          // doc id, e.g. "SANDY50"
   code: string;
@@ -22,4 +23,5 @@ export interface Order {
   status: 'completed' | 'failed';
   createdAt: string;
   capturedAt?: string;
+  payerEmail?: string; // Added payerEmail to Order interface
 }

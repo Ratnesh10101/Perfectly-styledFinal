@@ -1,3 +1,4 @@
+// src/types/payment.ts
 export interface CheckoutRequest {
   baseAmount: number;
   discountCode?: string;
@@ -15,4 +16,5 @@ export interface PaymentSuccessData {
   payerId: string;
   finalAmount: number;
   discountCode?: string;
+  payerEmail?: string | null; // Made explicit that it can be null
 }
