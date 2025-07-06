@@ -1,3 +1,4 @@
+// src/contexts/PayPalProvider.tsx
 'use client';
 
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
@@ -12,7 +13,11 @@ export const PayPalProvider = ({ children }: PayPalProviderProps) => {
 
   const options = {
     clientId: clientId || '',
+<<<<<<< HEAD
     currency: 'GBP',
+=======
+    currency: 'GBP', // Changed from 'EUR' to 'GBP'
+>>>>>>> ff75e1b (Payment page final)
     intent: 'capture' as const,
   };
 

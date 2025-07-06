@@ -1,4 +1,4 @@
-
+// src/app/report/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -82,7 +82,7 @@ export default function ReportPage() {
         <ReportDisplay report={{
           recommendations: reportData.recommendations,
           questionnaireData: reportData.questionnaireData,
-          recipientEmail: reportData.recipientEmail,
+          recipientEmail: reportData.recipientEmail, // Ensure recipientEmail is passed
           generatedAtClient: reportData.generatedAtClient,
          }} />
       ) : (
