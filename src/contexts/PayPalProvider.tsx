@@ -13,7 +13,11 @@ export const PayPalProvider = ({ children }: PayPalProviderProps) => {
 
   const options = {
     clientId: clientId || '',
+<<<<<<< HEAD
     currency: 'GBP', // Changed from 'EUR' to 'GBP'
+=======
+    currency: 'GBP', // Ensure currency is set to GBP
+>>>>>>> c8341bb (Payment page update)
     intent: 'capture' as const,
   };
 
