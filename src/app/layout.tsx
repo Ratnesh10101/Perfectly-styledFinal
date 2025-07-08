@@ -15,14 +15,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <PayPalProvider>
           {children}
-          <footer className="fixed bottom-4 right-4 text-sm text-muted-foreground z-50">
+          <footer className="fixed bottom-4 right-4 text-l text-muted-foreground z-50">
             <a
               href="https://www.instagram.com/perfectlystyled.co.uk"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              Need help? Message us on Instagram
+              Need help or have feedback to give? Message us on Instagram
             </a>
           </footer>
         </PayPalProvider>
