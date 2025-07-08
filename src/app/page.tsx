@@ -16,7 +16,7 @@ export default function HomePage() {
         <CardHeader className="pb-4">
           <CardTitle className="text-4xl font-bold tracking-tight text-primary">Welcome to Perfectly Styled!</CardTitle>
           <CardDescription className="text-lg text-muted-foreground pt-2">
-            Discover your unique style identity. Our analysis helps you understand your body shape, scale and line to curate a wardrobe that truly represents you.
+            Discover your unique style identity. Our analysis helps you understand your body shape, scale and line to curate a wardrobe that truly represents you. Please note that this analysis is designed only for women.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
