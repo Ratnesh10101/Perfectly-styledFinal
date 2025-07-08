@@ -48,19 +48,6 @@ export default function HomePage() {
           </CardFooter>
         </Card>
       </div>
-
-      {/* Bottom-right Instagram contact message */}
-      <div className="fixed bottom-4 right-4 text-sm text-muted-foreground bg-white border rounded-lg px-4 py-2 shadow-md">
-        Need help? Message us on Instagram:{" "}
-        <a
-          href="https://instagram.com/perfectlystyled.co.uk"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary underline"
-        >
-          @perfectlystyled.co.uk
-        </a>
-      </div>
     </div>
   );
 }
