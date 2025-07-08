@@ -1,11 +1,8 @@
 "use client";
-<<<<<<< HEAD
-=======
 // components/PayPalCheckout.tsx
 
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useState } from 'react';
->>>>>>> c8341bb (Payment page update)
 import type { PaymentSuccessData } from '@/types/payment';
 import { useToast } from '@/hooks/use-toast'; // Import useToast
 
@@ -124,49 +121,10 @@ export default function PayPalCheckout({
               variant: "destructive",
               duration: 5000,
             });
-<<<<<<< HEAD
-            const { orderId, error } = (await res.json()) as { orderId?: string; error?: string };
-            if (!orderId) throw new Error(error);
-            return orderId;
-          } catch (e) {
-            onError(e);
-            setBusy(false);
-            throw e;
-          }
-        }}
-        onApprove={async (data, actions) => {
-          try {
-            const details = await actions.order!.capture();
-            await fetch('/api/payment-success', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                orderId: details.id!,
-                payerId: details.payer?.payer_id,
-                finalAmount: final,
-                discountCode,
-              }),
-            });
-            onSuccess({
-              orderId: details.id!,
-              payerId: details.payer?.payer_id || '',
-              finalAmount: final,
-              discountCode: discountCode ?? undefined,
-            });
-          } catch (e) {
-            onError(e);
-          } finally {
-            setBusy(false);
-          }
-        }}
-        onError={onError}
-      />
-=======
             onError(e); // Propagate error to parent
           }}
         />
       )}
->>>>>>> c8341bb (Payment page update)
     </>
   );
 }
