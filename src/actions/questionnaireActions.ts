@@ -230,10 +230,7 @@ export async function processPaymentAndGenerateReport(
 
   if (!questionnaireData) {
     const errorMsg = "Server Action: processPaymentAndGenerateReport ERRORED: No questionnaire data provided. This should have been caught client-side.";
-<<<<<<< HEAD
-=======
     console.error(errorMsg);
->>>>>>> c8341bb (Payment page update)
     return { success: false, message: "Questionnaire data is missing. Cannot generate report." };
   }
   if (!email || typeof email !== 'string' || !email.includes('@')) { // Added more robust email validation
@@ -251,11 +248,7 @@ export async function processPaymentAndGenerateReport(
   console.log("Server Action: Received Questionnaire Data for logic-based report:", JSON.stringify(questionnaireData, null, 2));
   console.log("Server Action: Received Payment Data:", JSON.stringify(paymentData, null, 2));
   console.log("Server Action: Received Email for logic-based report:", email);
-<<<<<<< HEAD
-
-=======
   
->>>>>>> c8341bb (Payment page update)
   try {
     // --- Firestore: Save Payment Information ---
     console.log("Server Action: Attempting to save payment data to Firestore.");
