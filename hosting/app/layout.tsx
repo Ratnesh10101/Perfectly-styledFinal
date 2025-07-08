@@ -5,7 +5,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <footer className="fixed bottom-4 right-4 text-sm text-muted-foreground">
+          <a
+            href="https://www.instagram.com/perfectlystyled.co.uk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            Need help? Message us on Instagram
+          </a>
+        </footer>
+      </body>
     </html>
   );
 }
