@@ -13,8 +13,6 @@ interface Props {
   onSuccess: (d: PaymentSuccessData) => void;
   onError: (e: unknown) => void; // Keep onError for general errors
 }
-import { useState } from 'react';
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 
 export default function PayPalCheckout({
   baseAmount,
@@ -83,13 +81,13 @@ export default function PayPalCheckout({
             try {
               const details = await actions.order!.capture();
               console.log("PayPalCheckout: Order captured successfully. Details:", details);
-              
+
               const paymentSuccessData: PaymentSuccessData = {
-                  orderId: details.id!,
-                  payerId: details.payer?.payer_id || '',
-                  finalAmount: final,
-                  discountCode: discountCode ?? undefined,
-                  payerEmail: null, // Email will be collected in the next step
+                orderId: details.id!,
+                payerId: details.payer?.payer_id || '',
+                finalAmount: final,
+                discountCode: discountCode ?? undefined,
+                payerEmail: null, // Email will be collected in the next step
               };
 
               console.log("PayPalCheckout: Calling onSuccess with data:", paymentSuccessData);
@@ -113,14 +111,23 @@ export default function PayPalCheckout({
               console.log("PayPalCheckout: onApprove process finished. Busy set to false.");
             }
           }}
-          onError={e => {
+          onError={(e) => {
             console.error("PayPalCheckout: Error from PayPalButtons onError:", e);
+
+            const errorMessage =
+              e instanceof Error
+                ? e.message
+                : typeof e === "string"
+                  ? e
+                  : "An unknown error occurred with PayPal.";
+
             toast({
               title: "PayPal Error",
-              description: `An error occurred with the PayPal integration: ${(e as Error).message}. Please check your browser's pop-up blocker.`,
+              description: `An error occurred with the PayPal integration: ${errorMessage}. Please check your browser's pop-up blocker.`,
               variant: "destructive",
               duration: 5000,
             });
+
             onError(e); // Propagate error to parent
           }}
         />
