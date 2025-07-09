@@ -21,7 +21,6 @@ import { Progress } from "@/components/ui/progress";
 import { ChevronLeft, ChevronRight, Send } from "lucide-react";
 import type { QuestionnaireData, LineAnswer, ScaleAnswer } from "@/types";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import Image from "next/image";
 
 // Schemas for individual form fields
 const lineAnswerSchema = z.string().min(1, "Please select an option.");
@@ -43,21 +42,21 @@ const combinedSchema = z.object({
 type QuestionnaireFormValues = z.infer<typeof combinedSchema>;
 
 const stepSchemas: z.ZodObject<any, any, any, any, any>[] = [
-  z.object({ 
+  z.object({
     shoulders_answer: lineAnswerSchema,
     waist_answer: lineAnswerSchema,
     hips_answer: lineAnswerSchema,
   }),
-  z.object({ 
+  z.object({
     face_answer: lineAnswerSchema,
     jawline_answer: lineAnswerSchema,
   }),
-  z.object({ 
+  z.object({
     wrist_answer: scaleAnswerSchema,
     height_answer: scaleAnswerSchema,
     shoeSize_answer: scaleAnswerSchema,
   }),
-  z.object({ 
+  z.object({
     bodyShape: bodyShapeSchema,
   }),
 ];
@@ -65,7 +64,7 @@ const stepSchemas: z.ZodObject<any, any, any, any, any>[] = [
 
 interface QuestionnaireFormProps {
   onSubmit: (data: QuestionnaireData) => Promise<void>;
-  initialData?: Partial<QuestionnaireData>; 
+  initialData?: Partial<QuestionnaireData>;
 }
 
 const lineOptions = {
@@ -155,9 +154,9 @@ export default function QuestionnaireForm({ onSubmit, initialData }: Questionnai
     });
     return formValues;
   };
-  
+
   const form = useForm<QuestionnaireFormValues>({
-    resolver: zodResolver(combinedSchema), 
+    resolver: zodResolver(combinedSchema),
     defaultValues: {
       shoulders_answer: transformInitialDataToFormValues(initialData).shoulders_answer || undefined,
       waist_answer: transformInitialDataToFormValues(initialData).waist_answer || undefined,
@@ -225,13 +224,13 @@ export default function QuestionnaireForm({ onSubmit, initialData }: Questionnai
     } else {
       console.warn(`Step schema for step ${currentStep} is not a ZodObject or shape is undefined.`);
     }
-    
-    if (fieldsToValidate.length === 0 && currentStep < stepSchemas.length -1) { 
-        console.warn(`No fields identified for validation for step ${currentStep}. Proceeding or submitting.`);
+
+    if (fieldsToValidate.length === 0 && currentStep < stepSchemas.length - 1) {
+      console.warn(`No fields identified for validation for step ${currentStep}. Proceeding or submitting.`);
     }
 
     const isValid = fieldsToValidate.length > 0 ? await form.trigger(fieldsToValidate) : true;
-    
+
     if (isValid) {
       if (currentStep < stepSchemas.length - 1) {
         setCurrentStep((prev) => prev + 1);
@@ -260,7 +259,7 @@ export default function QuestionnaireForm({ onSubmit, initialData }: Questionnai
           <FormControl>
             <RadioGroup
               onValueChange={field.onChange}
-              value={field.value || undefined} 
+              value={field.value || undefined}
               className="flex flex-col space-y-2"
             >
               {options.map((option) => (
@@ -312,7 +311,7 @@ export default function QuestionnaireForm({ onSubmit, initialData }: Questionnai
                 {renderRadioGroup("shoeSize_answer", "Shoe size:", scaleOptions.shoeSize)}
               </>
             )}
-            {currentStep === 3 && ( 
+            {currentStep === 3 && (
               <FormField
                 control={form.control}
                 name="bodyShape"
@@ -322,27 +321,19 @@ export default function QuestionnaireForm({ onSubmit, initialData }: Questionnai
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
-                        value={field.value || undefined} 
+                        value={field.value || undefined}
                         className="space-y-4"
                       >
                         {bodyShapeOptions.map((option) => (
                           <FormItem key={option.name} className="border p-4 rounded-lg hover:bg-muted/50 transition-colors">
                             <div className="flex items-start space-x-3">
-                               <FormControl>
+                              <FormControl>
                                 <RadioGroupItem value={option.name} id={option.name.replace(/\s+/g, '')} />
-                               </FormControl>
+                              </FormControl>
                               <div className="flex-1">
                                 <FormLabel htmlFor={option.name.replace(/\s+/g, '')} className="font-semibold text-md cursor-pointer">
                                   {option.name}
                                 </FormLabel>
-                                <Image 
-                                  src={`https://placehold.co/200x300.png`} 
-                                  alt={option.name} 
-                                  data-ai-hint={option.dataAiHint}
-                                  width={100} 
-                                  height={150} 
-                                  className="my-2 rounded-md float-right ml-4 aspect-[2/3] object-cover" 
-                                />
                                 <p className="text-sm text-muted-foreground mt-1 pr-2">{option.description}</p>
                               </div>
                             </div>
@@ -355,7 +346,7 @@ export default function QuestionnaireForm({ onSubmit, initialData }: Questionnai
                 )}
               />
             )}
-            {currentStep === stepSchemas.length - 1 && <button type="submit" style={{display: "none"}} disabled={isLoading} />}
+            {currentStep === stepSchemas.length - 1 && <button type="submit" style={{ display: "none" }} disabled={isLoading} />}
           </form>
         </Form>
       </CardContent>
@@ -367,9 +358,9 @@ export default function QuestionnaireForm({ onSubmit, initialData }: Questionnai
           <Button type="button" onClick={handleNext} disabled={isLoading}>
             Next <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
-        ) : ( 
+        ) : (
           <Button type="button" onClick={handleNext} disabled={isLoading}>
-            {isLoading ? <LoadingSpinner size={20} className="mr-2"/> : <Send className="mr-2 h-4 w-4" />}
+            {isLoading ? <LoadingSpinner size={20} className="mr-2" /> : <Send className="mr-2 h-4 w-4" />}
             Proceed to Get Report
           </Button>
         )}
