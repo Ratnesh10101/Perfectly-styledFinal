@@ -110,11 +110,11 @@ const scaleOptions = {
 };
 
 const bodyShapeOptions = [
-  { name: "Pear Shape", description: "Smaller upper body, often with narrow shoulders and/or a petite bust. The waist is defined, leading to broader hips. This shape often includes full thighs and a more prominent lower body.", dataAiHint: "fashion illustration" },
-  { name: "Inverted Triangle", description: "Shoulders are wider than the hips, often accompanied by a fuller bust. Typically, this shape also features a shorter waist.", dataAiHint: "fashion sketch" },
-  { name: "Straight", description: "Hips and shoulders are aligned with little to no waist definition, creating an overall straight silhouette. Often gives a boxy or column-like appearance.", dataAiHint: "mannequin outline" },
-  { name: "Round/Apple", description: "A rounded figure with fullness throughout. The waist is less defined, creating a naturally curvy outline.", dataAiHint: "body shape" },
-  { name: "Hourglass", description: "Balanced proportions between shoulders and hips, with a well-defined waist that is typically 8-10 inches smaller than the hips. Curves are evenly distributed, with straight shoulders and a rounded lower body.", dataAiHint: "classic silhouette" },
+  { name: "Pear Shape", description: "Smaller upper body, often with narrow shoulders and/or a petite bust. The waist is defined, leading to broader hips. This shape often includes full thighs and a more prominent lower body." },
+  { name: "Inverted Triangle", description: "Shoulders are wider than the hips, often accompanied by a fuller bust. Typically, this shape also features a shorter waist." },
+  { name: "Straight", description: "Hips and shoulders are aligned with little to no waist definition, creating an overall straight silhouette. Often gives a boxy or column-like appearance." },
+  { name: "Round/Apple", description: "A rounded figure with fullness throughout. The waist is less defined, creating a naturally curvy outline." },
+  { name: "Hourglass", description: "Balanced proportions between shoulders and hips, with a well-defined waist that is typically 8-10 inches smaller than the hips. Curves are evenly distributed, with straight shoulders and a rounded lower body." },
 ];
 
 
