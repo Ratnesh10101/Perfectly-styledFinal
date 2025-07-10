@@ -13,8 +13,8 @@ const PAYPAL_API_BASE_URL = process.env.PAYPAL_API_BASE_URL || 'https://api-m.pa
 async function paypalToken() {
   // --- CHANGE 2: Use LIVE PayPal Client ID and Secret ---
   // These environment variables should be set in your production deployment environment
-  const id = process.env.PAYPAL_LIVE_CLIENT_ID!; // Assuming you'll use this env var name for live
-  const secret = process.env.PAYPAL_LIVE_SECRET!; // Assuming you'll use this env var name for live
+  const id = process.env.NEXT_PUBLIC_PAYPAL_SANDBOX_CLIENT_ID!; // Assuming you'll use this env var name for live
+  const secret = process.env.PAYPAL_SANDBOX_SECRET!; // Assuming you'll use this env var name for live
 
   if (!id || !secret) {
     console.error("PayPal LIVE API credentials are not set in environment variables!");
