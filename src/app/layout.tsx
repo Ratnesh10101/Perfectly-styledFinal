@@ -11,14 +11,15 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      {/* 👇 add `pb-20` (or whatever size feels right) */}
-      <body className={`${inter.className} pb-20`}>
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} h-full flex flex-col`}>
         <PayPalProvider>
-          {children}
+          <main className="flex-grow">
+            {children}
+          </main>
 
-          {/* fixed footer stays where it is */}
-          <footer className="fixed bottom-4 right-4 text-l text-muted-foreground z-50">
+          {/* Footer now stays at bottom naturally */}
+          <footer className="p-4 text-l text-muted-foreground">
             <a
               href="https://www.instagram.com/perfectlystyled.co.uk"
               target="_blank"
