@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
+declare global {
+  interface Window {
+    gtagScriptLoaded?: boolean;
+  }
+}
+
+
 export default function CookieConsentBanner() {
   const [showBanner, setShowBanner] = useState(false);
 
