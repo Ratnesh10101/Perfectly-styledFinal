@@ -61,7 +61,7 @@ export default function CookieConsentBanner() {
   return (
     <div className="fixed bottom-0 left-0 right-0 p-4 bg-gray-800 text-white text-sm z-50 flex justify-between items-center flex-wrap">
       <p className="mb-2 md:mb-0">
-        We use cookies to improve your experience and to analyze traffic. Do you consent to analytics cookies?
+        We use cookies to improve your experience and to analyse traffic. Do you consent to analytics cookies?
       </p>
       <div className="space-x-2">
         <button
