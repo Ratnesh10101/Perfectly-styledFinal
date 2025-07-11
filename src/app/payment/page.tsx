@@ -119,7 +119,7 @@ export default function PaymentPage() {
         sessionStorage.removeItem('paymentSuccessStatus');
         toast({
           title: "Report Generated!",
-          description: "Your personalized style report has been sent to your email.",
+          description: "Your personalised style report has been sent to your email.",
           duration: 5000,
         });
         router.push("/report");
@@ -151,7 +151,7 @@ export default function PaymentPage() {
             </div>
             <CardTitle className="text-3xl font-bold text-primary mb-2">Payment Successful!</CardTitle>
             <p className="text-lg text-muted-foreground">
-              Thank you for your purchase. Please enter your email to proceed to your personalized style report.
+              Thank you for your purchase. Please enter your email to proceed to your personalised style report.
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -215,7 +215,7 @@ export default function PaymentPage() {
               <span className="text-white text-2xl">💎</span>
             </div>
             <CardTitle className="text-3xl font-bold text-primary mb-3">Complete Your Style Journey</CardTitle>
-            <p className="text-muted-foreground text-lg mb-6">Get your personalized style report</p>
+            <p className="text-muted-foreground text-lg mb-6">Get your personalised style report</p>
           </CardHeader>
           <CardContent>
             <div className="bg-secondary/50 border border-border rounded-lg p-6 mb-8">
