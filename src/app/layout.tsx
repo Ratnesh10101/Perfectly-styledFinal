@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { PayPalProvider } from '../contexts/PayPalProvider';
+import CookieConsentBanner from '../components/CookieConsentBanner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               Need help or have feedback to give? Message us on Instagram
             </a>
           </footer>
+          <CookieConsentBanner /> {/* Mount the banner */}
         </PayPalProvider>
       </body>
     </html>
