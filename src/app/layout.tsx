@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { PayPalProvider } from '../contexts/PayPalProvider';
 
@@ -12,13 +13,29 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full">
+      <head>
+        {/* Google Analytics Script */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LLZ1XNNXET"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LLZ1XNNXET', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+      </head>
       <body className={`${inter.className} h-full flex flex-col`}>
         <PayPalProvider>
           <main className="flex-grow">
             {children}
           </main>
 
-          {/* Footer now stays at bottom naturally */}
           <footer className="p-4 text-l text-muted-foreground">
             <a
               href="https://www.instagram.com/perfectlystyled.co.uk"
