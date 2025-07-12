@@ -3,6 +3,8 @@ import Script from 'next/script';
 import './globals.css';
 import { PayPalProvider } from '../contexts/PayPalProvider';
 import CookieConsentBanner from '../components/CookieConsentBanner';
+import Link from 'next/link';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -46,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               Need help or have feedback to give? Message us on Instagram
             </a>
+            <Link href="/privacy">Privacy Policy</Link>
           </footer>
           <CookieConsentBanner /> {/* Mount the banner */}
         </PayPalProvider>
