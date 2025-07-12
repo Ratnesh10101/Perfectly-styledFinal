@@ -57,9 +57,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               Registered in England & Wales. Company No. 13846682.
             </p>
             <p>
-              <a href="/terms.html" className="underline hover:text-gray-700">
+              <Link href="/terms">
                 Terms of Service
-              </a>
+              </Link>
             </p>
             <p className="mt-2">
               © {new Date().getFullYear()} Rai Tech Solutions Ltd. All rights reserved.
