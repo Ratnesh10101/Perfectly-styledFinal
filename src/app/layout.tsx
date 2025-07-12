@@ -48,7 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               Need help or have feedback to give? Message us on Instagram
             </a>
+            <p>
             <Link href="/privacy">Privacy Policy</Link>
+            </p>
           </footer>
           <CookieConsentBanner /> {/* Mount the banner */}
         </PayPalProvider>
