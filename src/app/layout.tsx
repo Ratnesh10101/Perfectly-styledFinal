@@ -50,7 +50,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </a>
             <p>Or email us at <a href="mailto:contact@perfectlystyled.co.uk">contact@perfectlystyled.co.uk</a></p>
             <p>
-            <Link href="/privacy">Privacy Policy</Link>
+              <Link href="/privacy">Privacy Policy</Link>
+            </p>
+            <p>
+              Perfectly Styled is a trading name of Rai Tech Solutions Ltd.
+              Registered in England & Wales. Company No. 13846682.
+            </p>
+            <p>
+              <a href="/terms.html" className="underline hover:text-gray-700">
+                Terms of Service
+              </a>
+            </p>
+            <p className="mt-2">
+              © {new Date().getFullYear()} Rai Tech Solutions Ltd. All rights reserved.
             </p>
           </footer>
           <CookieConsentBanner /> {/* Mount the banner */}
