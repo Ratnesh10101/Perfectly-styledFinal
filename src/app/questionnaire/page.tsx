@@ -46,7 +46,7 @@ export default function QuestionnairePage() {
                 Now, answer the questionnaire and receive the results of your style
                 analysis along with recommended items of clothes and accessories
                 that will look best on each area of your body covered in the
-                questions!
+                questions.
             </p>
         </div>
       </div>
