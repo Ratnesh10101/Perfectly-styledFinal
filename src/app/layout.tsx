@@ -48,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               Need help or have feedback to give? Message us on Instagram
             </a>
+            <p>Or email us at <a href="mailto:contact@perfectlystyled.co.uk">contact@perfectlystyled.co.uk</a>.</p>
             <p>
             <Link href="/privacy">Privacy Policy</Link>
             </p>
