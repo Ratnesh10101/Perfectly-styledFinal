@@ -36,13 +36,13 @@ export default function HomePage() {
               </div>
             </div>
             <p className="text-muted-foreground">
-              First, complete our style questionnaire. Then, proceed to get your comprehensive style report.
+              First, complete our questionnaire. Then, proceed to get your comprehensive style report.
             </p>
           </CardContent>
           <CardFooter className="flex flex-col sm:flex-row justify-center gap-4 pt-6">
             <Button asChild size="lg">
               <Link href="/questionnaire">
-                Start Your Style Questionnaire
+                Start Your Questionnaire
               </Link>
             </Button>
           </CardFooter>
