@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -10,10 +10,46 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { DraftingCompass } from "lucide-react";
-import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { firestore } from "@/lib/firebase"; // adjust if your path is different
 
 export default function HomePage() {
+  const [email, setEmail] = useState("");
+  const [touched, setTouched] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleStart = async () => {
+    if (!isValidEmail(email)) return;
+
+    try {
+      setLoading(true);
+      const docRef = doc(firestore, "questionnaire_responses", email);
+      await setDoc(
+        docRef,
+        {
+          email,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+          status: "email_entered",
+        },
+        { merge: true }
+      );
+
+      router.push(`/questionnaire?email=${encodeURIComponent(email)}`);
+    } catch (err) {
+      console.error("Failed to save email:", err);
+      alert("Something went wrong saving your email. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="relative min-h-[calc(100vh-200px)]">
       <div className="flex flex-col items-center justify-center text-center">
@@ -47,16 +83,40 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-left text-muted-foreground"
+              >
+                Enter your email to begin:
+              </label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onBlur={() => setTouched(true)}
+              />
+              {touched && !isValidEmail(email) && (
+                <p className="text-sm text-red-600 text-left">
+                  Please enter a valid email address.
+                </p>
+              )}
+            </div>
+
             <p className="text-muted-foreground">
               First, complete our questionnaire. Then, proceed to get your comprehensive style report.
             </p>
           </CardContent>
-          <CardFooter className="flex flex-col sm:flex-row justify-center gap-4 pt-6">
-            <Button asChild variant="outline" size="lg">
-              <Link href="/add-email">Add Your Email</Link>
-            </Button>
-            <Button asChild size="lg">
-              <Link href="/questionnaire">Start Your Questionnaire</Link>
+          <CardFooter className="flex justify-center pt-6">
+            <Button
+              size="lg"
+              disabled={!isValidEmail(email) || loading}
+              onClick={handleStart}
+            >
+              {loading ? "Saving..." : "Start Your Questionnaire"}
             </Button>
           </CardFooter>
         </Card>
