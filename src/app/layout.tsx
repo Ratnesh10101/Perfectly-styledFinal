@@ -4,9 +4,12 @@ import './globals.css';
 import { PayPalProvider } from '../contexts/PayPalProvider';
 import CookieConsentBanner from '../components/CookieConsentBanner';
 import Link from 'next/link';
+import { Playfair_Display } from "next/font/google";
 
-
-const inter = Inter({ subsets: ['latin'] });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export const metadata = {
   title: 'Perfectly Styled',
@@ -33,7 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
-      <body className={`${inter.className} h-full flex flex-col`}>
+      <body className={playfair.className}>
+        {children}
         <PayPalProvider>
           <main className="flex-grow">
             {children}
