@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { firestore } from "@/lib/firebase"; // adjust if your path is different
+import { firestore } from "../config/firebase"; // adjust if your path is different
 
 export default function HomePage() {
   const [email, setEmail] = useState("");
