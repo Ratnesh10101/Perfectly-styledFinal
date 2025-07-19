@@ -57,7 +57,7 @@ export default function HomePage() {
         <img
           src="/Images/left-side.png"
           alt="Left style visual"
-          className="w-[300px] h-[500px] object-cover rounded-lg shadow-md"
+          className="w-[300px] h-[500px] object-cover"
         />
       </div>
 
@@ -146,7 +146,7 @@ export default function HomePage() {
         <img
           src="/Images/right-side.png"
           alt="Right style visual"
-          className="w-[300px] h-[500px] object-cover rounded-lg shadow-md"
+          className="w-[300px] h-[500px] object-cover"
         />
       </div>
     </div>
