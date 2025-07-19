@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { firestore } from "../config/firebase"; // adjust if your path is different
+import { firestore } from "../config/firebase";
 
 export default function HomePage() {
   const [email, setEmail] = useState("");
@@ -51,35 +51,53 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-[calc(100vh-200px)]">
-      <div className="flex flex-col items-center justify-center text-center">
-        <Card className="w-full max-w-2xl shadow-xl">
+    <div className="flex justify-center items-center min-h-[calc(100vh-200px)] px-4">
+      {/* Left Image */}
+      <div className="hidden lg:block mr-6">
+        <img
+          src="/Images/left-side.png"
+          alt="Left style visual"
+          className="w-[300px] h-[500px] object-cover rounded-lg shadow-md"
+        />
+      </div>
+
+      {/* Card */}
+      <div className="w-full max-w-2xl">
+        <Card className="shadow-xl">
           <CardHeader className="pb-4">
             <CardTitle className="text-4xl font-bold tracking-tight text-primary">
               Welcome to Perfectly Styled!
             </CardTitle>
             <CardDescription className="text-lg text-muted-foreground pt-2">
-              Our analysis helps you understand your body shape, scale and line to curate a wardrobe that truly represents you. Please note that this analysis is designed only for women.
+              Our analysis helps you understand your body shape, scale and line
+              to curate a wardrobe that truly represents you. Please note that
+              this analysis is designed only for women.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
               <div className="p-4 border rounded-lg bg-white">
-                <h3 className="font-semibold text-lg mb-1">Personalised Insights</h3>
+                <h3 className="font-semibold text-lg mb-1">
+                  Personalised Insights
+                </h3>
                 <p className="text-sm text-muted-foreground">
                   Unlock recommendations tailored to your specific features.
                 </p>
               </div>
               <div className="p-4 border rounded-lg bg-white">
-                <h3 className="font-semibold text-lg mb-1">Exhaustive and Detailed</h3>
+                <h3 className="font-semibold text-lg mb-1">
+                  Exhaustive and Detailed
+                </h3>
                 <p className="text-sm text-muted-foreground">
-                  The questionnaire is thorough and the report is full of detail and covers all aspects of clothes and accessories.
+                  The questionnaire is thorough and the report is very detailed.
+                  It covers all aspects of clothes and accessories.
                 </p>
               </div>
               <div className="p-4 border rounded-lg bg-white">
                 <h3 className="font-semibold text-lg mb-1">Boost Confidence</h3>
                 <p className="text-sm text-muted-foreground">
-                  Dress with confidence knowing your outfits are perfectly styled for you.
+                  Dress with confidence knowing your outfits are perfectly
+                  styled for you.
                 </p>
               </div>
             </div>
@@ -89,7 +107,7 @@ export default function HomePage() {
                 htmlFor="email"
                 className="block text-sm font-medium text-left text-muted-foreground"
               >
-                Enter your email to begin:
+                Enter your email to continue:
               </label>
               <Input
                 id="email"
@@ -107,7 +125,8 @@ export default function HomePage() {
             </div>
 
             <p className="text-muted-foreground">
-              First, complete our questionnaire. Then, proceed to get your comprehensive style report.
+              First, complete our questionnaire. Then, proceed to get your
+              comprehensive style report.
             </p>
           </CardContent>
           <CardFooter className="flex justify-center pt-6">
@@ -120,6 +139,15 @@ export default function HomePage() {
             </Button>
           </CardFooter>
         </Card>
+      </div>
+
+      {/* Right Image */}
+      <div className="hidden lg:block ml-6">
+        <img
+          src="/Images/right-side.png"
+          alt="Right style visual"
+          className="w-[300px] h-[500px] object-cover rounded-lg shadow-md"
+        />
       </div>
     </div>
   );
